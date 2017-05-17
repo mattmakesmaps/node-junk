@@ -1,0 +1,27 @@
+{
+  "name": "mkpiper",
+  "version": "0.1.0",
+  "description": "Does weird things with Point-In-Polygon testing.",
+  "main": "piper.js",
+  "dependencies": {
+    "iss": "0.0.2",
+    "point-in-polygon": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattmakesmaps/node-junk.git"
+  },
+  "keywords": [
+    "stupid"
+  ],
+  "author": "Matthew Kenny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattmakesmaps/node-junk/issues"
+  },
+  "homepage": "https://github.com/mattmakesmaps/node-junk#readme"
+}
