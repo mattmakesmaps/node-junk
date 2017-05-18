@@ -27,35 +27,25 @@ Piper.prototype.pip = function(inPoint) {
     }
 }
 
-Piper.prototype.trackISS = function() {
+Piper.prototype.trackISS = function(timeout_ms) {
     var stream = iss.locationStream(25544, 10);
-    
-    /**
-     * Begin Stream V1 Example, which passes context using `var self = this;`
-     * 
-     * var self = this;
-     * stream.on('data', function (buffer) {
-     *   var rawJson = buffer.toString('utf8')
-     *     var data = JSON.parse(rawJson);
-     *     selfpip([data.longitude, data.latitude]);
-     * }); 
-     */
 
-    /**
-     * Stream V2 API using `through`
-     */
+    // Kill stream if timeout is specified.
+    if (timeout_ms){
+        setTimeout(function(){stream.finished = true;}, timeout_ms);
+    }
 
     // Note use of `bind` to pass context
     stream.pipe(through(read.bind(this), end));
 
     function read(buffer) {
-        var rawJson = buffer.toString('utf8')
+        var rawJson = buffer.toString('utf8');
         var data = JSON.parse(rawJson);
         this.pip([data.longitude, data.latitude]);
     }
 
     function end() {
-        console.log('end');
+        console.log('Stream END Event Fired!');
     }
 
 }
