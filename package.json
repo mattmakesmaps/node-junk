@@ -5,6 +5,7 @@
   "main": "piper.js",
   "dependencies": {
     "iss": "0.0.2",
+    "mongodb": "^2.2.26",
     "point-in-polygon": "^1.0.1"
   },
   "devDependencies": {},
