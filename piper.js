@@ -22,12 +22,14 @@ Piper.prototype._testPip = function(inPoint) {
 Piper.prototype.pip = function(inPoint) {
     if (this._testPip(inPoint)) {
         this.emit('inside');
+        return true;
     } else {
         this.emit('outside');
+        return false;
     }
 }
 
-Piper.prototype.trackISS = function(timeout_ms) {
+Piper.prototype.trackISS = function(timeout_ms, callback) {
     var stream = iss.locationStream(25544, 10);
 
     // Kill stream if timeout is specified.
@@ -41,7 +43,11 @@ Piper.prototype.trackISS = function(timeout_ms) {
     function read(buffer) {
         var rawJson = buffer.toString('utf8');
         var data = JSON.parse(rawJson);
-        this.pip([data.longitude, data.latitude]);
+        var inside = this.pip([data.longitude, data.latitude]);
+        data.inside = inside;
+        if (callback) {
+            callback(data);
+        }
     }
 
     function end() {

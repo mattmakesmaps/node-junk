@@ -10,10 +10,8 @@ function DBTools(url) {
 DBTools.prototype._connect = function(err, callback) {
     if (!err) {
         MongoClient.connect(this.url, function(err, db) {
-            //mk note: maybe i need to install assert lib
             assert.equal(null, err);
-            callback();
-            // console.log("Connected correctly to server.");
+            callback(db);
             db.close();
         });
     }
@@ -22,11 +20,14 @@ DBTools.prototype._connect = function(err, callback) {
     }
 }
 
-DBTools.prototype.insert_data = function(err, documents, callback) {
-
-    // this._connect(null, insert_data(documents));
-
-    // function _insert_data(documents) {
-    //     // INSERT DATA
-    // }
+// 
+DBTools.prototype.insert_data = function(documents, callback) {
+    this._connect(null, function(db) {
+        var collection = db.collection('iss_positions');
+        collection.insertMany(documents, function(err, result) {
+            if (callback) {
+                callback(result);
+            }
+        });
+    });
 }

@@ -4,9 +4,11 @@
   "description": "Does weird things with Point-In-Polygon testing.",
   "main": "piper.js",
   "dependencies": {
+    "assert": "^1.4.1",
     "iss": "0.0.2",
     "mongodb": "^2.2.26",
-    "point-in-polygon": "^1.0.1"
+    "point-in-polygon": "^1.0.1",
+    "through": "^2.3.8"
   },
   "devDependencies": {},
   "scripts": {
